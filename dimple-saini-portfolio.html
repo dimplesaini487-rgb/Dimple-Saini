@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dimple Saini — Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F1F2EE;
+    --paper-raised: #FFFFFF;
+    --ink: #1B1E1B;
+    --ink-soft: #4B4F4A;
+    --muted: #80847E;
+    --line: #D9DBD3;
+    --accent: #1F5C46;
+    --accent-soft: #E4ECE7;
+    --max: 920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:20;
+    background:rgba(241,242,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .nav-name{
+    font-family:'Newsreader', serif;
+    font-size:19px;
+    font-style:italic;
+    font-weight:500;
+  }
+  nav.links{display:flex; gap:26px;}
+  nav.links a{
+    font-size:14px; text-decoration:none; color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  nav.links a:hover{color:var(--ink); border-color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:86px 0 56px;}
+  .hero h1{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:clamp(38px, 6vw, 62px);
+    line-height:1.08;
+    margin:0 0 22px;
+    max-width:15ch;
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:0 0 30px;
+  }
+  .stat-line{
+    display:flex; flex-wrap:wrap; gap:8px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding-top:16px;
+  }
+  .stat-line span{padding-right:18px; margin-right:18px; border-right:1px solid var(--line);}
+  .stat-line span:last-child{border-right:none;}
+  .stat-line b{color:var(--ink); font-weight:600;}
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:30px; gap:20px; flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:'Newsreader', serif;
+    font-style:italic; font-weight:500;
+    font-size:28px; margin:0;
+  }
+  .section-head .count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--muted);
+  }
+
+  /* ---------- Work filters ---------- */
+  .filters{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:6px;
+  }
+  .filters button{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px;
+    background:none;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    padding:7px 14px;
+    border-radius:100px;
+    cursor:pointer;
+  }
+  .filters button:hover{border-color:var(--ink-soft); color:var(--ink);}
+  .filters button.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:var(--paper);
+  }
+
+  /* ---------- Project list ---------- */
+  .project-list{margin-top:22px;}
+  .project-row{
+    display:flex; align-items:center; gap:18px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .project-row .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    width:26px;
+    flex-shrink:0;
+  }
+  .project-row .name{
+    font-size:16px;
+    flex:1 1 auto;
+    min-width:160px;
+  }
+  .project-row .domain{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    flex:1 1 auto;
+    min-width:150px;
+  }
+  .project-row .tag{
+    font-size:12px;
+    color:var(--accent);
+    border:1px solid var(--accent-soft);
+    background:var(--accent-soft);
+    padding:3px 10px;
+    border-radius:100px;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+  .project-row .go{
+    flex-shrink:0;
+    font-size:15px;
+    color:var(--muted);
+    transition:transform 0.15s ease, color 0.15s ease;
+  }
+  .project-row:hover .go{color:var(--ink); transform:translate(3px,-3px);}
+  .project-row:hover .name{text-decoration:underline; text-underline-offset:3px;}
+  .project-row.hidden{display:none;}
+
+  @media (max-width:640px){
+    .project-row{flex-wrap:wrap;}
+    .project-row .domain{order:3; width:100%; margin-left:44px;}
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px;}
+  .about-grid p{font-size:16px; color:var(--ink-soft); max-width:56ch;}
+  .skills{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+  .skills span{
+    font-size:13px;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:100px;
+    color:var(--ink-soft);
+  }
+  .meta-block{margin-top:26px; font-size:14px; color:var(--ink-soft);}
+  .meta-block div{margin-bottom:6px;}
+  .meta-block b{color:var(--ink); font-weight:600;}
+  @media (max-width:720px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Contact ---------- */
+  .contact-box{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:20px;
+  }
+  .contact-box h2{
+    font-family:'Newsreader', serif;
+    font-style:italic; font-weight:500;
+    font-size:32px; margin:0; max-width:14ch;
+  }
+  .contact-links a{
+    display:inline-block;
+    text-decoration:none;
+    font-size:15px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:12px 22px;
+    border-radius:100px;
+    margin-right:10px;
+  }
+  .contact-links a.secondary{
+    background:none; border:1px solid var(--line); color:var(--ink);
+  }
+  footer{
+    padding:26px 0 50px;
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  .fade-in{animation:fadeUp 0.7s ease both;}
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="nav-name">Dimple Saini</div>
+    <nav class="links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap fade-in">
+  <h1>Four years building brand websites that clients actually launch.</h1>
+  <p class="lede">Web developer based in Pathankot, Punjab — designing, building and maintaining client sites on WordPress, Shopify, Wix, Webflow and Squarespace.</p>
+  <div class="stat-line">
+    <span><b>4+</b> years at MKR Techsoft</span>
+    <span><b>30+</b> live client sites</span>
+    <span><b>4</b> platforms shipped on</span>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="count" id="work-count">30 sites</span>
+    </div>
+    <div class="filters" id="filters">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="WordPress">WordPress</button>
+      <button data-filter="Shopify">Shopify</button>
+      <button data-filter="Wix">Wix</button>
+      <button data-filter="Webflow">Webflow</button>
+    </div>
+    <div class="project-list" id="project-list"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I design, build and maintain client websites end-to-end — custom themes, plugin and app setup, front-end builds and ongoing fixes — translating what a client needs into a working, polished site. Most of my day is spent moving between five different platforms, so I keep builds clean and easy to hand back to a client's team.</p>
+        <div class="skills">
+          <span>WordPress</span><span>Shopify</span><span>Wix</span><span>Webflow</span>
+          <span>Squarespace</span><span>HTML &amp; CSS</span><span>Web Designing</span><span>UI/UX Development</span>
+        </div>
+      </div>
+      <div class="meta-block">
+        <div><b>Role</b> — Web Developer, MKR Techsoft (June 2022–present)</div>
+        <div><b>Education</b> — BCA in Computers, Guru Nanak Dev University, 2022</div>
+        <div><b>Languages</b> — English, Hindi, Punjabi</div>
+        <div><b>Based in</b> — Pathankot, Punjab, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-box">
+    <h2>Get in touch</h2>
+    <div class="contact-links">
+      <a href="mailto:sainidimple228@gmail.com">Email me</a>
+      <a class="secondary" href="tel:+917986995454">+91 79869 95454</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> Dimple Saini</span>
+  <span>Pathankot, Punjab, India</span>
+</footer>
+
+<script>
+  const projects = [
+    {name:"Cue Services", url:"https://cue-services.com", cat:"WordPress"},
+    {name:"A+ Concrete Restoration", url:"https://aplusconcreterestoration.com", cat:"WordPress"},
+    {name:"Casino Adam", url:"https://casinoadam.com", cat:"WordPress"},
+    {name:"Glaze For You", url:"https://glazeforyou.com", cat:"WordPress"},
+    {name:"Ambico", url:"https://ambico.com.au", cat:"WordPress"},
+    {name:"Oasis Kat", url:"https://oasiskat.com/", cat:"WordPress"},
+    {name:"Shamois", url:"https://shamois.com", cat:"WordPress"},
+    {name:"Open DMV Now", url:"https://Opendmvnow.com", cat:"WordPress"},
+    {name:"TrueSpec Performance", url:"https://truespecperformance.com", cat:"WordPress"},
+    {name:"NutraDare", url:"https://nutradare.com", cat:"WordPress"},
+    {name:"VPA Classical", url:"https://vpaclassical.com/", cat:"WordPress"},
+    {name:"Elisha Goldstein", url:"https://elishagoldstein.com/", cat:"WordPress"},
+    {name:"Catrike", url:"https://www.catrike.com", cat:"Wix"},
+    {name:"DB Gurus", url:"https://www.dbgurus.info/", cat:"Wix"},
+    {name:"King Art Collective", url:"https://www.kingartcollective.com/", cat:"Wix"},
+    {name:"Hello Gard", url:"https://www.hellogard.com/", cat:"Wix"},
+    {name:"Debra Katz", url:"https://www.debrakatz.com/", cat:"Wix"},
+    {name:"Sundance Tech", url:"https://sundancetech.ca/", cat:"Wix"},
+    {name:"The Fusion Experience", url:"https://www.thefusionexp.com/", cat:"Wix"},
+    {name:"MDI Active", url:"https://www.mdiactive.com/", cat:"Wix"},
+    {name:"Oktala", url:"https://Oktala.net", cat:"Wix"},
+    {name:"Jimmy Bars", url:"https://jimmybars.com", cat:"Shopify"},
+    {name:"Rising Tide Co", url:"https://rising-tide.co", cat:"Shopify"},
+    {name:"Tupensaci", url:"https://tupensaci.it", cat:"Shopify"},
+    {name:"My Joosh", url:"https://myjoosh.com", cat:"Shopify"},
+    {name:"The Linens Company", url:"https://thelinenscompany.com", cat:"Shopify"},
+    {name:"Leaves of Dawn", url:"https://www.leavesofdawn.com", cat:"Shopify"},
+    {name:"Paws & Nuggle", url:"https://pawsandnuggle.com", cat:"Shopify"},
+    {name:"Glow Superfoods", url:"https://glowsuperfoods.com", cat:"Shopify"},
+    {name:"The Dark Horse", url:"https://the-dark-horse-website.webflow.io/", cat:"Webflow"},
+  ];
+
+  const list = document.getElementById('project-list');
+  const countEl = document.getElementById('work-count');
+
+  function cleanDomain(url){
+    return url.replace(/^https?:\/\//,'').replace(/\/$/,'');
+  }
+
+  projects.forEach((p, i) => {
+    const row = document.createElement('a');
+    row.href = p.url;
+    row.target = "_blank";
+    row.rel = "noopener noreferrer";
+    row.className = "project-row";
+    row.dataset.cat = p.cat;
+    row.innerHTML = `
+      <span class="idx">${String(i+1).padStart(2,'0')}</span>
+      <span class="name">${p.name}</span>
+      <span class="domain">${cleanDomain(p.url)}</span>
+      <span class="tag">${p.cat}</span>
+      <span class="go">↗</span>
+    `;
+    list.appendChild(row);
+  });
+
+  const filterBtns = document.querySelectorAll('#filters button');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      const rows = document.querySelectorAll('.project-row');
+      let shown = 0;
+      rows.forEach(r => {
+        const match = (f === 'all' || r.dataset.cat === f);
+        r.classList.toggle('hidden', !match);
+        if(match) shown++;
+      });
+      countEl.textContent = `${shown} site${shown !== 1 ? 's' : ''}`;
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
